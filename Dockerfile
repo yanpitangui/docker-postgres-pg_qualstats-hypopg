@@ -6,6 +6,7 @@ FROM postgres:${PG_SERVER_VERSION}
 ARG PG_SERVER_VERSION
 
 LABEL maintainer="yanpitangui"
+LABEL org.opencontainers.image.source=https://github.com/yanpitangui/docker-postgres-pg_qualstats-hypopg
 LABEL org.opencontainers.image.licenses=MIT
 LABEL org.opencontainers.image.description="This repo contains the dockerfile for Postgres with HypoPG and PG Qualstats"
 
@@ -14,7 +15,13 @@ RUN apt-get update -o Acquire::CompressionTypes::Order::=gz \
     && apt-get install --no-install-recommends -y \
        postgresql-${PG_SERVER_VERSION}-hypopg \
        postgresql-${PG_SERVER_VERSION}-hypopg-dbgsym \
+    # qual stats
     && apt-get install --no-install-recommends -y postgresql-${PG_SERVER_VERSION}-pg-qualstats \
+    # index advisor
+    && apt-get install --no-install-recommends -y git build-essential \
+    && git clone -c http.sslverify=false https://github.com/supabase/index_advisor.git \
+    && cd index_advisor \
+    && make install \
     && cd / && rm -rf /tmp/* && apt-get purge -y --auto-remove \
        gcc make wget unzip curl libc6-dev apt-transport-https git \
        postgresql-server-dev-${PG_SERVER_VERSION} pgxnclient build-essential \

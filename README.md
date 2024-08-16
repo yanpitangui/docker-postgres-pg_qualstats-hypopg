@@ -1,0 +1,1 @@
+# Postgres docker image with hypopg, pg_stat_statements, pg_qualstats and supabase index_advisor pre installed
