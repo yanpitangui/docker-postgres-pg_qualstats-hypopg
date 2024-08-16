@@ -8,7 +8,7 @@ ARG PG_SERVER_VERSION
 LABEL maintainer="yanpitangui"
 LABEL org.opencontainers.image.source=https://github.com/yanpitangui/docker-postgres-pg_qualstats-hypopg
 LABEL org.opencontainers.image.licenses=MIT
-LABEL org.opencontainers.image.description="This repo contains the dockerfile for Postgres with HypoPG and PG Qualstats"
+LABEL org.opencontainers.image.description="Postgres docker image with hypopg, pg_stat_statements, pg_qualstats and supabase index_advisor pre installed"
 
 RUN apt-get update -o Acquire::CompressionTypes::Order::=gz \
     # HypoPG
